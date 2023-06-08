@@ -1,0 +1,16 @@
+Primeiro foi feita a instalação do Redis na máquina virtual por meio do comando "sudo apt install redis", e em seguida foi instalada a biblioteca RQ por meio do comando "sudo apt install python3-rq"
+Após as instalações necessárias, foi escrito um script em Python:
+
+from redis import Redis
+from rq import Queue
+from time import sleep
+q = Queue(connection=Redis(), name='atividade13')
+q.enqueue(sleep, 1)
+q.enqueue(sleep, 2)
+q.enqueue(sleep, 3)
+q.enqueue(sleep, 5)
+q.enqueue(sleep, 8)
+q.enqueue(sleep, 13)
+q.enqueue(sleep, 21)
+
+Dentro da linha de comando o script foi executado e em dois outros terminais, foram chamados os comandos "rq worker atividade13" para o framework executar o que foi especificado na lista de trabalho (job queue) e "rq info" para mostrar informações de quantas listas, trabalhos e workers estão em andamento ou foram concluídos. 
